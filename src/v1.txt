@@ -1,0 +1,206 @@
+index.js
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import { Provider } from "react-redux"
+import { store } from "./redux/Store"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Table from "./Table"
+import ViewUser from "./ViewUser"
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+    <Provider store={store}>
+        <BrowserRouter>
+        <Routes>
+            <Route path="/"  element={<App/>}/>
+            <Route path="/Table" element={<Table/>}/>
+            <Route path="/Table/ViewUser/:id" element={<ViewUser/>}/>
+        </Routes>
+        </BrowserRouter>
+    </Provider>
+)
+
+
+
+App.js
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+export default function App(){
+    const navigate = useNavigate()
+    const [Data ,setData ] = useState({  Nom:"",Age:"" , Genre:"homme",City:"casablanca"});
+    const active = useSelector(state => state.inUpdate);
+    const UserUp = useSelector(state => state.NewUser)
+    useEffect(()=>{
+        if(active ===true && UserUp){
+            setData({...Data, Nom:UserUp.Nom , Age:UserUp.Age , Genre:UserUp.Genre , City:UserUp.City})
+        }
+    },[UserUp,active])
+    const dispatch = useDispatch();
+    function add(){
+        dispatch(
+            {
+                type:"add",
+                payload: {
+                    Data
+                },
+            }
+        )
+        setData({ Nom:"",Age:"" , Genre:"homme",City:"casablanca"})
+        navigate("/Table")
+    }
+    function edit(){
+        dispatch(
+            {
+                type:"edit",
+                payload:{
+                    newData:Data
+                }
+            }
+        )
+        setData({ Nom:"",Age:"" , Genre:"homme",City:"casablanca"})
+        navigate("/Table")
+    }
+    return(
+        <div>
+            <input type="text" value={Data.Nom}  onChange={(e)=>setData({...Data, Nom:e.target.value})}/>
+            <input type="number" value={Data.Age} onChange={(e)=> setData({...Data, Age:Number(e.target.value)})}/>
+            <label>Homme</label><input type="radio" value="homme" name="genre" onChange={(e)=> setData({...Data , Genre:e.target.value})}/>
+            <label>Femme</label><input type="radio"  value="femme" name="genre" onChange={(e)=> setData({...Data , Genre:e.target.value})}/>
+            <select  onChange={(e)=> setData({...Data , City:e.target.value})}>
+                <option value="casablanca">casablanca</option>
+                <option value="rabat">rabat</option>
+            </select>
+            {(active)? <button onClick={edit}>Edit</button> :<button onClick={add}>Ajouter</button>}
+            
+        </div>
+    ) 
+}
+
+Table.js
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+export default function Table(){
+    const dispatch = useDispatch();
+    const table = useSelector(state => state.tableau)
+    const navigate = useNavigate();
+    function supprimer(id){
+        dispatch({
+            type:"delet",
+            payload:{id}
+        })
+    }
+    
+    function update(id){
+        dispatch({
+            type:"update",
+            payload:{
+                IdUp:id
+            }
+        })
+        navigate("/")
+    }
+    
+    return(
+        <div>
+            <table border="3">
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Age</th>
+                    <th>Genre</th>
+                    <th>City</th>
+                    <th colSpan={3}>Action</th>
+                </tr>
+                {table.map((e)=>
+                    <tr>
+                        <td>{e.id}</td>
+                        <td>{e.Nom}</td>
+                        <td>{e.Age}</td>
+                        <td>{e.Genre}</td>
+                        <td>{e.City}</td>
+                        <td><button onClick={()=>supprimer(e.id)} >delet</button></td>
+                        <td><button onClick={()=>update(e.id)} >update</button></td>
+                        <td><button ><Link to={`/Table/ViewUser/${e.id}`} >View</Link> </button></td>
+                    </tr>
+                )}
+            </table>
+        </div>
+    )
+}
+ViewUser.js
+import React from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+export default function ViewUser(){
+    const {id} = useParams()
+    const view = useSelector(state => state.tableau)
+    const result =  view.find((e)=> e.id  ===  parseInt(id))
+    return(
+        <div>
+            <p>{result.Nom}</p>
+            <p>{result.Age}</p>
+            <p>{result.Genre}</p>
+            <p>{result.City}</p>
+        </div>
+    )
+}
+
+Reducers.js
+
+
+
+const initial = {
+    tableau : [],
+    Idcurrent :0,
+    IdUp:0,
+    NewUser:[],
+    inUpdate:false,
+}
+export default function Reducers(state = initial , action){
+    switch(action.type){
+        case "add":
+            return(
+                {...state,
+                tableau: [...state.tableau , { id : state.Idcurrent,  ...action.payload.Data}],
+                Idcurrent : state.Idcurrent+1,
+            }
+            )
+        case "delet":
+            return(
+                {
+                    ...state,
+                    tableau : state.tableau.filter((e)=> action.payload.id !== e.id)
+                }
+            )
+        case "update":
+            return(
+                {
+                    ...state,
+                    IdUp:action.payload.IdUp,
+                    NewUser : state.tableau.find((e)=> e.id === state.IdUp),
+                    inUpdate:true,
+                }
+            )
+        case "edit":
+            return(
+                {
+                    ...state,
+                    tableau : state.tableau.map((e)=> (state.IdUp === e.id )? {...e, ...action.payload.newData} : e ),
+                    inUpdate:false,
+                }
+            )
+        
+        default:
+            return(
+            state
+        )
+    }
+}
+store.js
+import { createStore } from "redux";
+import Reducers from "./Reducers";
+import { composeWithDevTools } from "@redux-devtools/extension";
+export const store = createStore(Reducers , composeWithDevTools());
