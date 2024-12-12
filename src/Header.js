@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 export default function Header() {
-  
+  const dispatch = useDispatch()
   const [Action, setAction] = useState(true);
   const Location = useLocation();
   const check = useSelector(state => state.check)
+  function logout(){
+    dispatch({
+      type :"logout",
+    })
+  }
   return (
     <div className="fixed px-3 bg-[#f7efe6] py-3 text-[#4b2d1f] w-full top-0 left-0 mb-[0px]">
       <div className="flex  justify-between  items-center ">
@@ -27,10 +32,11 @@ export default function Header() {
         <div className="hidden sm:flex space-x-4">
 
           { Object.keys(check).length === 0 ?<button className="bg-[#3a8e3a] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[2px] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out "> <Link to="/login" >Login</Link> </button>: (
-            <button className="bg-[#f39c12] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[2px] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out ">
-              <Link to={`/View/${check.id}`} >Profile</Link>
+            <button className="bg-[#f39c12]  text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[2px] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out ">
+              <Link to={`/View/${check.id}`} >Profile</Link> 
             </button>
           ) }
+          {Object.keys(check).length > 0   ?  <button onClick={logout} className="bg-[#f7efe6] text-[#4b2d1f] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#4b2d1f]  hover:bg-[#4b2d1f] hover:border-[2px] hover:border-[#f7efe6] hover:text-[#f7efe6] transition duration-[0.6s] ease-in-out "><Link to="/login">logout</Link></button>  :"" }
           
           
         </div>
@@ -48,6 +54,10 @@ export default function Header() {
           <li>
           { Object.keys(check).length === 0 ? <button> <Link to="/login">Login</Link> </button>:<button><Link to={`/View/${check.id}`} >Profile</Link></button>}
           </li>
+          <li>
+          {Object.keys(check).length > 0 ? <button onClick={logout} ><Link to="/login">logout</Link></button>  :"" }
+          </li>
+
         </ul>
       </div>
     </div>

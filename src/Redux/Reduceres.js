@@ -42,6 +42,11 @@ export function Reduceres( state = initial , action){
                   check : { ...state.check, ...action.payload.userUpdate },
                   inupdate: false,
                 };
+            case "logout" :
+                return {
+                    ...state,
+                   check : {}
+                }
               
         default:
             return(state)
