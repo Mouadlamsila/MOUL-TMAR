@@ -6,6 +6,7 @@ import About from "./About";
 import Login from "./Login";
 import View from "./View";
 import Update from "./Update";
+import Register from "./Register";
 
 export default function App() {
     return (
@@ -15,7 +16,7 @@ export default function App() {
           <Route path="/Home" element={<Main/>}/>
           <Route path="/About" element={<About/>}/>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/siginup" element={<Login/>}/>
+          <Route path="/siginup" element={<Register/>}/>
           <Route path="/View/:id" element={<View />} />
           <Route path="/Update/:id" element={<Update/>}/>
 

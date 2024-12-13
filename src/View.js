@@ -28,35 +28,35 @@ export default function View() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-gradient-to-r from-[#f7efe6] to-[#e0d7c3]">
-      <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-lg">
+      <div className="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-lg text-end">
         <h1 className="text-3xl font-extrabold text-[#4b2d1f] mb-6 border-b-2 border-[#4b2d1f] pb-3">
-          Détails de l'utilisateur
+        تفاصيل المستخدم
         </h1>
         <div className="space-y-4">
           <p className="text-lg font-medium text-gray-800">
-            <span className="font-bold text-[#3a8e3a]">Nom:</span> {view.Nom}
+            <span className="font-bold text-[#3a8e3a]">الاسم:{view.Nom}</span> 
           </p>
           <p className="text-lg font-medium text-gray-800">
-            <span className="font-bold text-[#3a8e3a]">Prénom:</span> {view.Prenom}
+            <span className="font-bold text-[#3a8e3a]">اللقب:</span> {view.Prenom}
           </p>
           <p className="text-lg font-medium text-gray-800">
-            <span className="font-bold text-[#3a8e3a]">Numéro:</span> {view.Numero}
+            <span className="font-bold text-[#3a8e3a]">الرقم الهاتف:</span> {view.Numero}
           </p>
           <p className="text-lg font-medium text-gray-800">
-            <span className="font-bold text-[#3a8e3a]">Email:</span> {view.Email}
+            <span className="font-bold text-[#3a8e3a]">البريد الإلكتروني:</span> {view.Email}
           </p>
         </div>
         <button
           className="mt-6 bg-[#4b2d1f] text-[#f7efe6] font-bold px-6 py-2 rounded-full hover:bg-[#3a8e3a] hover:text-white transition-all duration-300 ease-in-out mr-2"
           onClick={() => window.history.back()}
         >
-          Retour
+          عودة
         </button>
         <button
           onClick={Modifier}
-          className="mt-4 bg-[#f39c12] text-white font-bold px-4 py-2 rounded hover:bg-[#d35400] transition duration-300"
+          className="mt-4 bg-[#f39c12] text-white font-bold px-4 py-2 rounded-full hover:bg-[#d35400] transition duration-300"
         >
-          Update
+          تحديث
         </button>
       </div>
     </div>
