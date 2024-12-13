@@ -8,6 +8,8 @@ import View from "./View";
 import Update from "./Update";
 import Register from "./Register";
 import Home from "./Home";
+import Panier from "./Panier";
+import Pass from "./Pass";
 
 export default function App() {
     return (
@@ -20,7 +22,8 @@ export default function App() {
           <Route path="/siginup" element={<Register/>}/>
           <Route path="/View/:id" element={<View />} />
           <Route path="/Update/:id" element={<Update/>}/>
-
+          <Route path="/ForgetPass" element={<Pass/>}/>
+          <Route path="/Panier" element={<Panier/>}/>
         </Routes>
         </BrowserRouter>
     );
