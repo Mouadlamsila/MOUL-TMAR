@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"
+
 
 export default function Login(){
     
@@ -39,8 +39,8 @@ export default function Login(){
                     <input type="text" className=" text-end  w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4b2d1f]" placeholder="اسم المستخدم"  onChange={(e)=>setLogin({...login, UserName:e.target.value})} /><br/>
                     <input type="password" className="text-end w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4b2d1f]" placeholder="كلمة المرور" onChange={(e)=>setLogin({...login , Password:e.target.value})}/><br/>
                     <div className="">
-                    <button onClick={Login} className="text-center w-full bg-[#4b2d1f] text-[#f7efe6] py-2 rounded hover:bg-[#3a2318] transition duration-300" >تسجيل الدخول</button><br/>
-                    <button className="text-[#4b2d1f] underline hover:text-[#3a2318] transition duration-300 mt-3"  > <Link to="/siginup">  إنشاء حساب</Link></button><label className="mt-4 text-sm text-gray-600"> ليس لدي حساب ؟  </label><br/>
+                    <button onClick={Login} className="text-center w-full bg-[#4b2d1f] text-[#f7efe6] py-2 rounded hover:bg-[#3a2318] transition duration-300 font-[Almarai]" >تسجيل الدخول</button><br/>
+                    <button className="text-[#4b2d1f] underline hover:text-[#3a2318] transition duration-300 mt-3"  > <Link to="/siginup" className="font-[Almarai]">  إنشاء حساب</Link></button><label className="mt-4 text-sm text-gray-600"> ليس لدي حساب ؟  </label><br/>
                     {msg && <p  className='text-red-500 mt-2'>{msg}</p>}
                     </div>
                     

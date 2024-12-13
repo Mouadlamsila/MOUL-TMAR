@@ -23,11 +23,11 @@ export default function Header() {
           {/* Login/Account Button */}
           {Object.keys(check).length === 0 ? (
             <button className="bg-[#3a8e3a] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out">
-              <Link to="/login">تسجيل الدخول </Link>
+              <Link to="/login" className="font-[Almarai]">تسجيل الدخول </Link>
             </button>
           ) : (
             <button className="bg-[#f39c12] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out">
-              <Link to={`/View/${check.id}`}>الحساب</Link>
+              <Link to={`/View/${check.id}`} className="font-[Almarai]">الحساب</Link>
             </button>
           )}
 
@@ -37,7 +37,7 @@ export default function Header() {
               onClick={logout}
               className="bg-[#f7efe6] text-[#4b2d1f] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#4b2d1f] hover:bg-[#4b2d1f] hover:border-[#f7efe6] hover:text-[#f7efe6] transition duration-[0.6s] ease-in-out"
             >
-              <Link to="/login">تسجيل الخروج</Link>
+              <Link to="/login" className="font-[Almarai]">تسجيل الخروج</Link>
             </button>
           )}
         </div>
@@ -60,7 +60,7 @@ export default function Header() {
               </svg>}
 
               {/* Title */}
-              {search ? "" : <p className="text-[25px]">القائمة الرئيسية</p>}
+              {search ? "" : <Link to="/"><p className="text-[19px] font-[Almarai]">القائمة الرئيسية</p></Link>}
 
                 {/* Close Search Icon */}
               {search && (
@@ -130,7 +130,7 @@ export default function Header() {
               </svg>}
 
               {/* Title */}
-              {search ? "" : <p className="text-[19px]">القائمة الرئيسية</p>}
+              {search ? "" : <Link to="/"><p className="text-[19px] font-[Almarai]">القائمة الرئيسية</p></Link>}
 
                 {/* Close Search Icon */}
               {search && (
@@ -184,26 +184,25 @@ export default function Header() {
       >
         
         <ul className="space-y-4">
-          <li onClick={() => setAction(!action)}>Home</li>
-          <li onClick={() => setAction(!action)}>About</li>
-          <li onClick={() => setAction(!action)}>Service</li>
+          <li onClick={() => setAction(!action)}><Link to="/"><p className="text-[19px] font-[Almarai]">القائمة الرئيسية</p></Link></li>
+    
         </ul>
         <ul className="space-y-4">
           <li>
             {Object.keys(check).length === 0 ? (
               <button onClick={() => setAction(!action)}>
-                <Link to="/login">Login</Link>
+                <Link to="/login" className="font-[Almarai]">تسجيل الدخول </Link>
               </button>
             ) : (
               <button onClick={() => setAction(!action)}>
-                <Link to={`/View/${check.id}`}>Profile</Link>
+                <Link to={`/View/${check.id}`} className="font-[Almarai]">الحساب</Link>
               </button>
             )}
           </li>
           <li>
             {Object.keys(check).length > 0 && (
               <button onClick={logout}>
-                <Link to="/login">Logout</Link>
+                <Link to="/login" className="font-[Almarai]">تسجيل الخروج</Link>
               </button>
             )}
           </li>

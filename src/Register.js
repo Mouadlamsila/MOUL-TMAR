@@ -33,8 +33,8 @@ export default function Register(){
                     <input type="email" className=" text-end p-1 w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4b2d1f]" placeholder="البريد الإلكتروني" onChange={(e)=> setRegister({...Register , Email :e.target.value})}/><br/>
                     <input type="password" className="text-end p-1 w-full p-2 mb-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#4b2d1f]" placeholder="كلمة المرور" required  onChange={(e)=> setRegister({...Register , Password :e.target.value})}/><br/>
                     <div className=" text-[#f7efe6] e">
-                    <button  onClick={register} className="w-full bg-[#4b2d1f] text-[#f7efe6] py-2 rounded hover:bg-[#3a2318] transition duration-300">إنشاء حساب</button><br/>
-                     <button className="text-[#4b2d1f] underline hover:text-[#3a2318] transition duration-300 mt-3 " > <Link to="/login"> تسجيل الدخول </Link></button><label  className="mt-4  mr-1 text-sm text-gray-600">  لدي بالفعل حساب ؟      </label> <br/>
+                    <button  onClick={register} className="w-full bg-[#4b2d1f] text-[#f7efe6] py-2 rounded hover:bg-[#3a2318] transition duration-300 font-[Almarai]">إنشاء حساب</button><br/>
+                     <button className="text-[#4b2d1f] underline hover:text-[#3a2318] transition duration-300 mt-3 " > <Link to="/login" className="font-[Almarai]"> تسجيل الدخول </Link></button><label  className="mt-4  mr-1 text-sm text-gray-600">  لدي بالفعل حساب ؟      </label> <br/>
                      <p className="text-red-500">{msg}</p>
                     </div>
                 
