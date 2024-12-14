@@ -20,7 +20,12 @@ export default function Login(){
                     type:"login",
                     payload : {finded},
                 })
-                navigate("/")
+                if(finded.Role === "admin"){
+                    navigate("/Table")
+                }else{
+                    navigate("/")
+                }
+                
             }else{
                 setmsg("⚠️كلمة المرور أو اسم المستخدم غير صحيح")
             }

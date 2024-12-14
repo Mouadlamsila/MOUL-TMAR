@@ -10,7 +10,9 @@ import Register from "./Register";
 import Home from "./Home";
 import Panier from "./Panier";
 import Pass from "./Pass";
+import TableDates from "./TableDates";
 
+import UpdateDate from "./UpdateDate";
 export default function App() {
     return (
         <BrowserRouter>
@@ -24,6 +26,9 @@ export default function App() {
           <Route path="/Update/:id" element={<Update/>}/>
           <Route path="/ForgetPass" element={<Pass/>}/>
           <Route path="/Panier" element={<Panier/>}/>
+          <Route path="/Table" element={<TableDates/>}/>
+          <Route path="/UpdateDate/:ID" element={<UpdateDate/>}/>
+
         </Routes>
         </BrowserRouter>
     );

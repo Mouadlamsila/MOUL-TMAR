@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   const dispatch = useDispatch();
   const [action, setAction] = useState(true);
-  const [search, setSearch] = useState();
+  const [search] = useState();
   const check = useSelector((state) => state.check);
 
   function logout() {
@@ -81,7 +81,7 @@ export default function Header() {
 
         {/* Brand Name */}
         <div className="font-bold text-[30px]" style={{ fontFamily: "Reem Kufi" }}>
-          &#127796; تمر طاجز
+          &#127796; تَـمر طــازَج
         </div>
 
       </div>

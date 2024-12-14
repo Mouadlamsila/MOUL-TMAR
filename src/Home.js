@@ -23,7 +23,7 @@ export default function Home() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await fetch("http://localhost/my-app/public/PHP/Select.php");
+                const res = await fetch("http://localhost/project/api/public/PHP/Select.php");
                 const data = await res.json();
                 if (data.status === "success") {
                     setDates(data.dates);

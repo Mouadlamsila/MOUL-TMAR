@@ -55,7 +55,7 @@ export default function View() {
             <span className="font-bold text-[#3a8e3a]">: اللقب</span>
           </p>
           <p className="text-lg w-[90%] sm:w-[80%] flex justify-between font-medium text-gray-800">
-            <span>{view.Nom}</span>
+            <span>{view.UserName}</span>
             <span className="font-bold text-[#3a8e3a]">: اسم المستخدم</span>
           </p>
           <p className="text-lg w-[90%] sm:w-[80%] flex justify-between font-medium text-gray-800">
