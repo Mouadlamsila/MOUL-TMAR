@@ -22,7 +22,7 @@ export default function UpdateDate() {
 
     useEffect(() => {
         axios
-            .post("http://localhost/project/api/public/PHP/update.php", { idUp: parseInt(ID) })
+            .post("http://localhost/my-app/public/PHP/update.php", { idUp: parseInt(ID) })
             .then((res) => {
                 if (res.data.status === "success") {
                     setDateSelection(res.data.dates);

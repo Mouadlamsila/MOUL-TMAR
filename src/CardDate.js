@@ -40,7 +40,7 @@ export default function CardDate(props) {
             <p className=' text-[30px] mb-2 font-bold font-[Almarai]'>{props.date.Name}</p>
             <p><CountryFlag country={props.date.Origin} /></p>
             <p>{props.date.Price} DH</p>
-            <button className='w-full flex mt-4 items-center justify-center text-center hover:scale-110 transition-transform duration-300 font-bold font-[Almarai]'>
+            <button onClick={()=>props.pn(props.date.ID)} className='w-full flex mt-4 items-center justify-center text-center hover:scale-110 transition-transform duration-300 font-bold font-[Almarai]'>
                 <FaBasketShopping /> &nbsp; أضف إلى السلة
             </button>
         </div>
