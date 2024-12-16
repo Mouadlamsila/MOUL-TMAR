@@ -60,7 +60,7 @@
 ```bash
     git clone https://github.com/Mouadlamsila/MOUL-TMAR.git
     cd moul-tamr
-
+```
 ---
 
 2. بعد تثبيت المشروع، قم بتثبيت الحزم التالية باستخدام npm:
@@ -70,7 +70,7 @@
     npm install redux-devtools-extension --legacy-peer-deps
     npm install react-world-flags --legacy-peer-deps
     npm install react-icons --legacy-peer-deps
-
+```
 ---
 
 
@@ -108,7 +108,7 @@ src/
 │── UpdateDate.js         # تحديث تواريخ محددة
 │── View.js               # عرض التفاصيل والبيانات
 
-
+```
 
 
 
