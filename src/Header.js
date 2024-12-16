@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
   const dispatch = useDispatch();
   const [action, setAction] = useState(true);
-  const [search] = useState();
   const check = useSelector((state) => state.check);
-
+  const locate = useLocation();
   function logout() {
     setAction(!action);
     dispatch({
@@ -45,14 +44,17 @@ export default function Header() {
         {/* Search Bar */}
         <div className="hidden sm:flex space-x-4">
           <div
-            className={`bg-[#f7efe6] flex px-4 py-3 ${search ? `border-b border-[#333]` : ""} sm:flex hidden focus-within:border-black-500 overflow-hidden max-w-md mx-auto font-[sans-serif]`}
+            className={`bg-[#f7efe6] flex px-4 py-3 sm:flex hidden focus-within:border-black-500 overflow-hidden max-w-md mx-auto font-[sans-serif]`}
           >
             <div className="flex items-center justify-between gap-[30px]">
-              
-              {/* Title */}
-              {search ? "" : <Link to="/"><p className="text-[25px] font-bold  font-[Almarai]">القائمة الرئيسية</p></Link>}
 
-              
+              {locate.pathname === "/" ?
+                <p className="text-[25px] font-bold text-[#f7efe6] font-[Almarai]">القائمة الرئيسية</p>
+                :
+                <Link to="/"><p className="text-[25px] font-bold  font-[Almarai]">القائمة الرئيسية</p></Link>
+
+              }
+
             </div>
           </div>
         </div>
@@ -75,13 +77,15 @@ export default function Header() {
           </svg>
         </button>
 
-        
+
 
 
 
         {/* Brand Name */}
-        <div className="font-bold text-[30px]" style={{ fontFamily: "Reem Kufi" }}>
-          &#127796; تَـمر طــازَج
+        <div className="font-bold text-[30px] cursor-pointer" style={{ fontFamily: "Reem Kufi" }}>
+          <Link to="/">
+            &#127796;  مـُـول الـتّــمـر
+          </Link>
         </div>
 
       </div>
@@ -89,7 +93,7 @@ export default function Header() {
 
 
 
-      
+
 
 
 

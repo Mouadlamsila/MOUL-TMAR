@@ -1,184 +1,82 @@
-import React, { useEffect, useState } from "react";
-import CardDate from "./CardDate";
-import { useNavigate } from "react-router-dom";
-import { FaBasketShopping } from "react-icons/fa6";
-import Flag from 'react-world-flags';
-import { IoIosClose } from "react-icons/io";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
-    const [Message, setMessage] = useState('');
-    const [Dates, setDates] = useState([]);
-    const [fil, setFil] = useState([]);
-    const [Search, setSearch] = useState("");
-    const [paniersl, setPaniersl] = useState(() => {
-        // Load paniersl data from localStorage when component mounts
-        const saved = localStorage.getItem("paniersl");
-        return saved ? JSON.parse(saved) : [];
-    });
-    const [showCart, setShowCart] = useState(false);
+    const navigate = useNavigate();
 
-    function ko(s) {
-        setSearch(s);
-        setPaniersl(paniersl.filter(r => r.ID === s));
-    }
-
-    useEffect(() => {
-        const filtrage = () => {
-            setFil(Dates.filter((date) => date.Name.toLowerCase().includes(Search.toLowerCase())));
-        };
-        filtrage();
-    }, [Search]);
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const res = await fetch("http://localhost/my-app/public/PHP/select.php");
-                const data = await res.json();
-                if (data.status === "success") {
-                    setDates(data.dates);
-                    setFil(data.dates);
-                } else {
-                    setMessage(data.message);
-                }
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        }
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        console.log(Dates);
-    }, [Dates]);
-
-    const [panier, setPanier] = useState([]);
-    
-    function AddPanier(id) {
-        const find = Dates.find((date) => date.ID === id);
-        if (find && !panier.some((e) => e.ID === id)) {
-            setPanier([...panier, find]);
-        }
-    }
-
-    function pn(id) {
-        const find = Dates.find((date) => date.ID === id);
-        if (find && !paniersl.some((e) => e.ID === id)) {
-            const userInput = prompt(`الاسم: ${find.Name}\nالوزن بلكيلوغرام:`);
-            if (userInput) {
-                const weight = parseFloat(userInput);
-                if (!isNaN(weight)) {
-                    alert(`تم الاضافة للسلة`);
-
-                    setPaniersl([...paniersl, { ...find, weight }]);
-                    setShowCart(true);
-                } else {
-                    alert("يرجى إدخال وزن صحيح.");
-                }
-            } else {
-                alert("لم يتم إضافة العنصر.");
-            }
-        }
-    }
-
-    const totalPrice = paniersl.reduce((total, item) => total + (item.Price * item.weight), 0);
-
-    const removeFromCart = (id) => {
-        setPaniersl(paniersl.filter(item => item.ID !== id));
+    const handleSupportClick = () => {
+        navigate("/support");
     };
-
-    const updateWeight = (id) => {
-        const updatedWeight = prompt("أدخل الوزن الجديد بالكيلوغرام:");
-        const weight = parseFloat(updatedWeight);
-        if (!isNaN(weight)) {
-            setPaniersl(paniersl.map((item) =>
-                item.ID === id ? { ...item, weight } : item
-            ));
-        } else {
-            alert("يرجى إدخال وزن صحيح.");
-        }
-    };
-
-    // Save paniersl to localStorage whenever it changes
-    useEffect(() => {
-        localStorage.setItem("paniersl", JSON.stringify(paniersl));
-    }, [paniersl]);
 
     return (
-        <div className="pt-16 w-full h-full bg-[#F7EFE6] scroll-smooth transition-all duration-300">
-
-            <div className="flex justify-center items-center my-8">
-                <input
-                    type="text"
-                    placeholder="...بحث"
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="text-end bg-[#F7EFE6] pl-10 pr-4 py-2 w-auto sm:w-[400px] rounded-lg shadow-lg outline-none font-[Almarai] font-bold focus:ring-2 focus:ring-[#4B2D1F] focus:border-[#4B2D1F] transition-all duration-300"
-                />
+        <div
+            className="w-full min-h-screen bg-cover bg-center flex flex-col justify-between font-[Almarai]"
+            style={{ backgroundImage: "url('/backgrounds/b2.jpeg')" }}
+        >
+            {/* Content Card */}
+            <div className="flex-grow flex items-center justify-center mt-20 sm:mt-0">
+                <div className="relative z-10 w-[90%] md:w-[75%] lg:w-[60%] max-w-4xl bg-white/70 border border-t-4 border-[#4b2d1f] rounded-3xl shadow-xl p-6 md:p-10 text-center">
+                    <h1 className="text-[#4b2d1f] text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+                        مـُـول الـتّــمـر
+                    </h1>
+                    <p className="rtl text-gray-600 text-base md:text-lg leading-relaxed font-[Almarai] font-bold">
+                        مرحباً بكم في <span className="text-[#4b2d1f] font-bold">مـُـول الـتّــمـر، </span>
+                        وجهتكم المثالية لشراء أفضل أنواع التمر الفاخر. نحن نقدم لكم مجموعة متنوعة من
+                        التمور الطازجة والمميزة التي تم اختيارها بعناية لتلبية كافة احتياجاتكم.
+                        <br /><br />
+                        سواء كنتم تبحثون عن التمور الصحية للوجبات الخفيفة أو تلك التي تضيف لمسة من الفخامة
+                        لمناسباتكم الخاصة، فإننا في مول التمر نقدم لكم الجودة والذوق الرفيع.
+                    </p>
+                    <button className="mt-6 md:mt-8 bg-[#4b2d1f] text-white text-base md:text-lg py-2 md:py-3 px-6 md:px-8 rounded-full shadow-md hover:shadow-lg hover:bg-[#5c3928] transition-all">
+                        <Link to="/Produits">
+                            استكشف الآن
+                        </Link>
+                    </button>
+                </div>
             </div>
 
-
-            <div
-                className="z-10 fixed top-[45%] -right-16 bg-red-500 px-2 rounded-l-full cursor-pointer shadow-lg transition-all duration-300"
-                onClick={() => setShowCart(!showCart)}
-            >
-                <i className="fa fa-shopping-cart text-white py-4 px-2 mr-3"></i>
-                Panier
-            </div>
-
-
-            {fil.length > 0 ? (
-                <div className="px-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-[40px]">
-                    {fil.map((date, index) => (
-                        <div key={date.ID}>
-                            <CardDate AddPanier={AddPanier} pn={pn} date={date} />
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <p className="w-full text-center bg-[#F7EFE6] sm:text-[30px] font-bold font-[Almarai]">
-                    {Message ? Message : "...جاري التحميل"}
-                </p>
-            )}
-
-            {showCart && (
-                <div className="fixed flex max-sm:w-full flex-col w-1/3 min-h-screen z-[99] bg-[#F7EFE6] top-0 right-0 rounded-l-3xl shadow-lg transition-transform duration-300">
-                    <div className="flex justify-between items-center p-5">
-                        <div className="flex">
-                            <p className="text-xl font-bold">{totalPrice.toFixed(2)}DH </p>
-                            <p className="text-xl font-bold">: المجموع</p>
-                        </div>
-                        <div className="cursor-pointer text-[30px]" onClick={() => setShowCart(false)}><IoIosClose /></div>
+            {/* Footer */}
+            <footer className="bg-[#4b2d1f] text-white text-center py-4 flex flex-col md:flex-row justify-between items-center px-4 md:px-8">
+                {/* Support Section */}
+                <div className="flex flex-col items-center mb-4 md:mb-0">
+                    <div
+                        onClick={handleSupportClick}
+                        className="flex items-center justify-center bg-white text-[#4b2d1f] w-12 h-12 rounded-full shadow-md cursor-pointer hover:bg-[#5c3928] hover:text-white transition-all"
+                    >
+                        🛠️
                     </div>
+                    <p className="text-sm mt-2">الدعم الفني</p>
+                </div>
 
-                    <div className="overflow-y-auto h-[calc(100vh-130px)] px-4">
-                        {paniersl.map((u) => (
-                            <div
-                                key={u.ID}
-                                className="w-auto flex text-center justify-center mb-9 bg-white rounded-2xl py-[2em] shadow-md hover:translate-y-3 transition-transform duration-300"
-                            >
-                                <div>
-                                    <p className="text-[30px] mb-2 font-bold font-[Almarai]">{u.Name}</p>
-                                    <p className="text-xl text-gray-700">{u.Price} </p>
-
-                                    <p className="text-lg text-gray-600"><span className="font-bold font-[Almarai]">الوزن:</span> {u.weight} كغ</p>
-
-                                    <button onClick={() => updateWeight(u.ID)} className="text-yellow-500 mx-4 mt-4 font-bold font-[Almarai]">تحديث الوزن</button>
-
-                                    <button onClick={() => removeFromCart(u.ID)} className="text-red-500 mt-4 font-bold font-[Almarai]">حذف من السلة</button>
-                                </div>
-                                <div className="w-1/2 flex justify-center">
-                                    <img
-                                        src={`/PHP/${u.ImagePath}`}
-                                        alt={u.Name}
-                                        className="w-[200px] h-[160px] rounded-lg shadow-md"
-                                    />
-                                </div>
-                            </div>
-                        ))}
+                {/* Contact Section */}
+                <div className="flex flex-col items-center text-sm md:text-base mb-4 md:mb-0">
+                    <div className="flex items-center gap-2">
+                        <span className="text-lg">📧</span>
+                        <a
+                            href="mailto:moltamer@gmail.com"
+                            className="underline hover:text-gray-300"
+                        >
+                            moltamer@gmail.com
+                        </a>
+                    </div>
+                    <div className="flex items-center gap-2 mt-2">
+                        <span className="text-lg">📞</span>
+                        <a
+                            href="tel:+212695993292"
+                            className="underline hover:text-gray-300"
+                        >
+                            +212 695-993292
+                        </a>
                     </div>
                 </div>
-            )}
 
+                {/* Copyright Section */}
+                <div>
+                    <p className="rtl text-[13px] md:text-[15px] font-[Almarai]">
+                        © 2024 مـُـول الـتّــمـر <br />جميع الحقوق محفوظة
+                    </p>
+                </div>
+            </footer>
         </div>
     );
 }

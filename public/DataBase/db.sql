@@ -32,3 +32,28 @@ VALUES
     ('اللولو', 'الإمارات', 'طري', 'تمر طري ومطاطي، حلو جدًا.', 'غني بالطاقة', 40.00, 'images/lulu.jpg'),('الحساوي', 'اليمن', 'طري', 'تمر حلو وطري، غني بالنكهة.', 'غني بالفيتامينات والمعادن', 60.00, 'images/hasawi.jpg'),
     ('نبتة علي', 'السعودية', 'شبه جاف', 'تمر متوسط الحجم، بني ذهبي.', 'مفيد للصحة العامة', 40.00, 'images/nabta_ali.jpg'),('الجيهل', 'المغرب', 'شبه جاف', 'تمر طويل وداكن، يُقدم مع القهوة.', 'غني بالطاقة', 60.00, 'images/jihl.jpg'),
     ('الخلاصه', 'الإمارات', 'شبه جاف', 'تمر حلو جدًا ولزج.', 'مناسب للحلويات', 60.00, 'images/khalasa.jpg');
+
+
+    CREATE TABLE payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,               -- Nom complet
+    email VARCHAR(255) NOT NULL,              -- Adresse email
+    card_number VARCHAR(16) NOT NULL,         -- Numéro de carte (16 chiffres)
+    expiry_date VARCHAR(5) NOT NULL,          -- Date d'expiration (format MM/AA)
+    cvv VARCHAR(3) NOT NULL,                  -- Code de sécurité (3 chiffres)
+    amount DECIMAL(10, 2) DEFAULT 0.00,       -- Montant payé
+    transaction_id VARCHAR(50),               -- ID unique de transaction
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Date du paiement
+);
+
+
+INSERT INTO payments (name, email, card_number, expiry_date, cvv, amount, transaction_id)
+VALUES (
+    'John Doe',
+    'johndoe@example.com',
+    '1234567812345678',
+    '12/25',
+    '123',
+    100.00,
+    'TXN123456'
+);
