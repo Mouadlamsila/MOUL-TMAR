@@ -18,14 +18,17 @@
 ## التقنيات المستخدمة  
 
 ### Frontend  
-- 🔧 **HTML5**  
-- 🎨 **CSS3**  
+- 🔧 **HTML**  
+- 🎨 **CSS**  
 - ⚙️ **JavaScript**  
-- 📱 **Bootstrap**  
+- 📱 **Tailwinds**  
 
 ### Backend  
 - 🖥️ **PHP**  
-- 🗄️ **MySQL**  
+- 🗄️ **MySQL**
+
+### FarmeWork
+- ⚙️ **ReactJs**
 
 ### أدوات أخرى  
 - 🗃️ **Git** لإدارة النسخ  
@@ -33,6 +36,43 @@
 - 💻 **Visual Studio Code** (بيئة تطوير)  
 
 ---
+
+
+## 👥 أعضاء الفريق
+
+|                                                   الاسم                  | المهام                  |      الاتصال          |
+|---------------------------------------------------------------|-------------------------|--------------------------------|
+| [belkahlam2005@gmail.com](mailto:belkahlam2005@gmail.com)     |          قسم الكتالوج   |       MOHAMED BELKAHLA         |
+| [mouadlamsila@gmail.com](mailto:mouadlamsila@gmail.com)       |  قسم الإدارة والمستخدم   |       MOUAD LAMSILA            |
+| [AmalHmiyd@gmail.com](mailto:zakariaelferrouni@gmail.com)     |             قسم الدفع   |       Amal Hmiyd               |
+| [AymenBahiaoui@gmail.com](mailto:AbdessamadMouline@gmail.com) |             قسم السلة   |       Aymen Bahiaoui           |
+
+    
+
+---
+
+## تثبيت المشروع 🚀
+
+اتبع الخطوات التالية لتثبيت المشروع على جهازك المحلي:
+
+1. قم باستنساخ المستودع باستخدام git:
+
+```bash
+    git clone https://github.com/Mouadlamsila/MOUL-TMAR.git
+    cd moul-tamr
+
+---
+
+2. بعد تثبيت المشروع، قم بتثبيت الحزم التالية باستخدام npm:
+
+```bash
+    npm install axios --legacy-peer-deps
+    npm install redux-devtools-extension --legacy-peer-deps
+    npm install react-world-flags --legacy-peer-deps
+    npm install react-icons --legacy-peer-deps
+
+---
+
 
 ## هيكل المشروع  
 ```plaintext
@@ -68,38 +108,7 @@ src/
 │── UpdateDate.js         # تحديث تواريخ محددة
 │── View.js               # عرض التفاصيل والبيانات
 
----
 
-## 👥 أعضاء الفريق
-
-|                                                   الاسم                  | المهام                  |      الاتصال          |
-|---------------------------------------------------------------|-------------------------|--------------------------------|
-| [belkahlam2005@gmail.com](mailto:belkahlam2005@gmail.com)     |          قسم الكتالوج   |       MOHAMED BELKAHLA         |
-| [mouadlamsila@gmail.com](mailto:mouadlamsila@gmail.com)       |  قسم الإدارة والمستخدم   |       MOUAD LAMSILA            |
-| [AmalHmiyd@gmail.com](mailto:zakariaelferrouni@gmail.com)     |             قسم الدفع   |       Amal Hmiyd               |
-| [AymenBahiaoui@gmail.com](mailto:AbdessamadMouline@gmail.com) |             قسم السلة   |       Aymen Bahiaoui           |
-
-    
-
----
-
-## تثبيت المشروع 🚀
-
-اتبع الخطوات التالية لتثبيت المشروع على جهازك المحلي:
-
-1. قم باستنساخ المستودع باستخدام git:
-
-```bash
-    git clone https://github.com/Mouadlamsila/MOUL-TMAR.git
-    cd moul-tamr
-
-2. بعد تثبيت المشروع، قم بتثبيت الحزم التالية باستخدام npm:
-
-```bash
-    npm install axios --legacy-peer-deps
-    npm install redux-devtools-extension --legacy-peer-deps
-    npm install react-world-flags --legacy-peer-deps
-    npm install react-icons --legacy-peer-deps
 
 
 
