@@ -43,7 +43,7 @@
 |                                                   الاتصال                  | المهام                  |      الاسم          |
 |---------------------------------------------------------------|-------------------------|--------------------------------|
 | [belkahlam2005@gmail.com](mailto:belkahlam2005@gmail.com)     |          قسم الكتالوج   |       MOHAMED BELKAHLA         |
-| [mouadlamsila@gmail.com](mailto:mouadlamsila@gmail.com)       |  قسم الإدارة والمستخدم   |       MOUAD LAMSILA            |
+| [mouad.lamssila@gmail.com](mailto:mouad.lamssila@gmail.com)       |  قسم الإدارة والمستخدم   |       MOUAD LAMSILA            |
 | [AmalHmiyd@gmail.com](mailto:zakariaelferrouni@gmail.com)     |             قسم الدفع   |       Amal Hmiyd               |
 | [AymenBahiaoui@gmail.com](mailto:AbdessamadMouline@gmail.com) |             قسم السلة   |       Aymen Bahiaoui           |
 
