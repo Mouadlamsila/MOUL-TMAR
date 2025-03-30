@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaBasketShopping } from "react-icons/fa6";
 import Flag from 'react-world-flags';
 import { IoIosClose } from "react-icons/io";
-
+import Swal from "sweetalert2";
+import { easeInOut, motion } from "framer-motion"
 export default function Produits() {
     const [Message, setMessage] = useState('');
     const [Dates, setDates] = useState([]);
-    const [fil, setFil] = useState([]);
+    const [datesfilrer, setDatesfilrer] = useState([]);
     const [Search, setSearch] = useState("");
     const [paniersl, setPaniersl] = useState(() => {
         // Load paniersl data from localStorage when component mounts
@@ -16,6 +17,9 @@ export default function Produits() {
         return saved ? JSON.parse(saved) : [];
     });
     const [showCart, setShowCart] = useState(false);
+    const userID = JSON.parse(sessionStorage.getItem('userID'));
+    const navigate = useNavigate()
+
 
     function ko(s) {
         setSearch(s);
@@ -24,7 +28,7 @@ export default function Produits() {
 
     useEffect(() => {
         const filtrage = () => {
-            setFil(Dates.filter((date) => date.Name.toLowerCase().includes(Search.toLowerCase())));
+            setDatesfilrer(Dates.filter((date) => date.Name.toLowerCase().includes(Search.toLowerCase())));
         };
         filtrage();
     }, [Search]);
@@ -36,7 +40,7 @@ export default function Produits() {
                 const data = await res.json();
                 if (data.status === "success") {
                     setDates(data.dates);
-                    setFil(data.dates);
+                    setDatesfilrer(data.dates);
                 } else {
                     setMessage(data.message);
                 }
@@ -49,8 +53,8 @@ export default function Produits() {
     }, []);
 
     useEffect(() => {
-        console.log(Dates);
-    }, [Dates]);
+        
+    }, [userID]);
 
     const [panier, setPanier] = useState([]);
 
@@ -62,22 +66,99 @@ export default function Produits() {
     }
 
     function pn(id) {
-        const find = Dates.find((date) => date.ID === id);
-        if (find && !paniersl.some((e) => e.ID === id)) {
-            const userInput = prompt(`الاسم: ${find.Name}\nالوزن بلكيلوغرام:`);
-            if (userInput) {
-                const weight = parseFloat(userInput);
-                if (!isNaN(weight)) {
-                    alert(`تم الاضافة للسلة`);
 
-                    setPaniersl([...paniersl, { ...find, weight }]);
-                    setShowCart(true);
-                } else {
-                    alert("يرجى إدخال وزن صحيح.");
-                }
+        const find = Dates.find((date) => date.ID === id);
+
+        if (find && !paniersl.some((e) => e.ID === id)) {
+            if (!userID) {
+                Swal.fire({
+                    title: 'يجب تسجيل الدخول ',
+                    icon: 'error',
+                    customClass:{
+                        title:'font-[Almarai] font-bold',
+                        confirmButton:'bg-green-500'
+                        
+                    },
+                    confirmButtonText:'حسنا',
+                    
+                    
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/login')
+                    }
+                })
             } else {
-                alert("لم يتم إضافة العنصر.");
+                Swal.fire({
+                    title: `الاسم: ${find.Name}<br> الوزن بالكيلوغرام:`,
+                    input: "number",
+                    customClass: {
+                        title: 'font-[Almarai] text-[#4b2d1f]',
+                        confirmButton: 'bg-green-500',
+                        oninvalid : "font-[Almarai]"
+                    },
+                    inputAttributes: {
+                        autocapitalize: "off",
+                        placeholder: "يرجى إدخال رقم",  // ← إضافة نص توضيحي بالعربية
+                        oninvalid: "this.setCustomValidity('يرجى إدخال رقم صالح')",
+                        oninput: "this.setCustomValidity('')" // ← إعادة ضبط الرسالة عند إدخال قيمة صحيحة
+                    },
+                    showCancelButton: true,
+                    cancelButtonText: 'إلغــاء',
+                    confirmButtonText: "أضــف",
+                    showLoaderOnConfirm: true,
+                    preConfirm: async (number) => {
+                        try {
+                            // تحويل الإدخال إلى رقم
+                            const weight = parseFloat(number);
+                
+                            // التحقق من صحة الإدخال
+                            if (!number || isNaN(weight) || weight <= 0) {
+                                throw new Error("يرجى إدخال وزن صحيح.");
+                            }
+                
+                            // إضافة المنتج إلى السلة
+                            setPaniersl([...paniersl, { ...find, weight }]);
+                            setShowCart(true);
+                
+                        } catch (error) {
+                            Swal.showValidationMessage(error.message);
+                        }
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: `تم الإضافة للسلة`,
+                            icon: "success",
+                            draggable: true
+                        });
+                    }
+                });
+                
+                
             }
+
+            // const userInput = prompt(`الاسم: ${find.Name}\nالوزن بلكيلوغرام:`);
+            /*  if (userInput) {
+                 const weight = parseFloat(userInput);
+                 if (!isNaN(weight)) {
+                     alert(`تم الاضافة للسلة`);
+ 
+                     setPaniersl([...paniersl, { ...find, weight }]);
+                     setShowCart(true);
+                 } else {
+                     alert("يرجى إدخال وزن صحيح.");
+                 }
+             } else {
+                 alert("لم يتم إضافة العنصر.");
+             } */
+        } else {
+            Swal.fire({
+                title: "العنصر موجود مسبقا",
+                icon: "error",
+                draggable: true
+            });
         }
     }
 
@@ -88,15 +169,51 @@ export default function Produits() {
     };
 
     const updateWeight = (id) => {
-        const updatedWeight = prompt("أدخل الوزن الجديد بالكيلوغرام:");
-        const weight = parseFloat(updatedWeight);
-        if (!isNaN(weight)) {
-            setPaniersl(paniersl.map((item) =>
-                item.ID === id ? { ...item, weight } : item
-            ));
-        } else {
-            alert("يرجى إدخال وزن صحيح.");
-        }
+        Swal.fire({
+            title: ":أدخل الوزن الجديد بالكيلوغرام",
+            input: "number",
+            customClass: {
+                title: 'font-[Almarai] text-[#4b2d1f]',
+                confirmButton: 'bg-green-500'
+            },
+            inputAttributes: {
+                autocapitalize: "off"
+            },
+            showCancelButton: true,
+            cancelButtonText: 'إلغــاء',
+            confirmButtonText: "تحديث",
+            showLoaderOnConfirm: true,
+            preConfirm: async (number) => {
+                try {
+                    // تحويل الإدخال إلى رقم
+                    const weight = parseFloat(number);
+        
+                    // التحقق من أن الوزن صالح (رقم موجب أكبر من صفر)
+                    if (!number || isNaN(weight) || weight <= 0) {
+                        throw new Error("يرجى إدخال وزن صحيح.");
+                    }
+        
+                    // تحديث بيانات القائمة إذا كان الرقم صالحًا
+                    setPaniersl(paniersl.map((item) =>
+                        item.ID === id ? { ...item, weight } : item
+                    ));
+        
+                } catch (error) {
+                    Swal.showValidationMessage(error.message);
+                }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `تم تحديث الوزن`,
+                    icon: "success",
+                    draggable: true
+                });
+            }
+        });
+        
+       
     };
 
     // Save paniersl to localStorage whenever it changes
@@ -105,14 +222,17 @@ export default function Produits() {
     }, [paniersl]);
 
     return (
-        <div className="pt-16 w-full h-full bg-[#F7EFE6] scroll-smooth transition-all duration-300">
+        <div className="pt-20 w-full h-full bg-[#F7EFE6] scroll-smooth transition-all duration-300">
 
             <div className="flex justify-center items-center my-8">
-                <input
+                <motion.input
+                    initial={{ y: -500, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, ease: easeInOut }}
                     type="text"
                     placeholder="...بحث"
                     onChange={(e) => setSearch(e.target.value)}
-                    className="text-end bg-[#F7EFE6] pl-10 pr-4 py-2 w-auto sm:w-[400px] rounded-lg shadow-lg outline-none font-[Almarai] font-bold focus:ring-2 focus:ring-[#4B2D1F] focus:border-[#4B2D1F] transition-all duration-300"
+                    className="text-end bg-[#F7EFE6] pl-10 pr-4 py-2 w-auto sm:w-[400px] rounded-lg shadow-lg outline-none font-[Almarai] font-bold ring-2 ring-[#4B2D1F] border-[#4B2D1F] transition-all duration-300"
                 />
             </div>
 
@@ -125,13 +245,20 @@ export default function Produits() {
                 Panier
             </div>
 
+            {datesfilrer.length > 0 ? (
+                <  div className="px-11 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-[40px]">
+                    {datesfilrer.map((date, index) => (
+                        <motion.div key={date.ID}
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{
+                                duration: 0.2, ease: easeInOut,
+                                delay: 0.2 * index
+                            }}
 
-            {fil.length > 0 ? (
-                <div className="px-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center gap-[40px]">
-                    {fil.map((date, index) => (
-                        <div key={date.ID}>
+                        >
                             <CardDate AddPanier={AddPanier} pn={pn} date={date} />
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             ) : (

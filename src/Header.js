@@ -1,37 +1,55 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+
+import {easeInOut, motion} from "framer-motion";
 
 export default function Header() {
   const dispatch = useDispatch();
   const [action, setAction] = useState(true);
-  const check = useSelector((state) => state.check);
+  const userID = JSON.parse(sessionStorage.getItem('userID'));
   const locate = useLocation();
+  const [render, setRender] = useState(false)
+
   function logout() {
     setAction(!action);
-    dispatch({
-      type: "logout",
-    });
+    axios.post('http://localhost/my-app/public/PHP/users/logout.php')
+    .then((res)=>{
+      if(res.data.status === 'success'){
+        sessionStorage.removeItem('userID')
+        localStorage.removeItem('paniersl')
+        setRender(!render)
+      }
+    })
   }
 
+  useEffect(() => {
+    
+  }, [render])
+
   return (
-    <div className="fixed px-3 bg-[#f7efe6] py-3 text-[#4b2d1f] w-full top-0 left-0 mb-[0px] z-50">
+    <motion.div className="fixed px-3 bg-[#f7efe6] py-3 text-[#4b2d1f] w-full shadow top-0 left-0 mb-[0px] z-50"
+    initial={{y:-50 , opacity:0}}
+    animate={{y:0 , opacity:1}}
+    transition={{duration:0.5 , ease:easeInOut}}
+    >
       <div className="flex justify-between items-center">
         {/* Desktop Header */}
         <div className="hidden sm:flex space-x-4">
           {/* Login/Account Button */}
-          {Object.keys(check).length === 0 ? (
+          {!userID ? (
             <button className="bg-[#3a8e3a] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out">
               <Link to="/login" className="font-[Almarai]">تسجيل الدخول </Link>
             </button>
           ) : (
             <button className="bg-[#f39c12] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out">
-              <Link to={`/View/${check.id}`} className="font-[Almarai]">الحساب</Link>
+              <Link to={`/View/${userID}`} className="font-[Almarai]">الحساب</Link>
             </button>
           )}
 
           {/* Logout Button */}
-          {Object.keys(check).length > 0 && (
+          {userID && (
             <button
               onClick={logout}
               className="bg-[#f7efe6] text-[#4b2d1f] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#4b2d1f] hover:bg-[#4b2d1f] hover:border-[#f7efe6] hover:text-[#f7efe6] transition duration-[0.6s] ease-in-out"
@@ -113,18 +131,18 @@ export default function Header() {
         </ul>
         <ul className="space-y-4">
           <li>
-            {Object.keys(check).length === 0 ? (
+            {!userID ? (
               <button onClick={() => setAction(!action)} className="bg-[#3a8e3a] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out">
                 <Link to="/login" className="font-[Almarai]">تسجيل الدخول </Link>
               </button>
             ) : (
               <button onClick={() => setAction(!action)} className="bg-[#f39c12] text-[#f7efe6] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#f7efe6] hover:bg-[#f7efe6] hover:border-[#3a8e3a] hover:text-[#3a8e3a] transition duration-[0.6s] ease-in-out">
-                <Link to={`/View/${check.id}`} className="font-[Almarai]">الحساب</Link>
+                <Link to={`/View/${userID}`} className="font-[Almarai]">الحساب</Link>
               </button>
             )}
           </li>
           <li>
-            {Object.keys(check).length > 0 && (
+            {userID && (
               <button onClick={logout} className="bg-[#f7efe6] text-[#4b2d1f] font-bold px-[20px] py-[8px] rounded border-[2px] border-[#4b2d1f] hover:bg-[#4b2d1f] hover:border-[#f7efe6] hover:text-[#f7efe6] transition duration-[0.6s] ease-in-out">
                 <Link to="/login" className="font-[Almarai]">تسجيل الخروج</Link>
               </button>
@@ -132,6 +150,6 @@ export default function Header() {
           </li>
         </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }

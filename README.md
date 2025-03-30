@@ -1,114 +1,70 @@
-# مول التمر - موقع التجارة الإلكترونية للتمور
+# Getting Started with Create React App
 
-## وصف المشروع  
-**"مول التمر"** هو موقع ويب للتجارة الإلكترونية متخصص في بيع التمور عالية الجودة. يهدف إلى تقديم تجربة تسوق إلكترونية سهلة وسريعة تلبي احتياجات محبي التمور، سواء في السوق المحلي أو العالمي، مع التركيز على جودة المنتجات ورضا العملاء.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
----
+## Available Scripts
 
-## المميزات الأساسية  
+In the project directory, you can run:
 
-- ✅ **سوق متخصص**: التركيز على التمور ومنتجاتها.  
-- 🎨 **واجهة مستخدم احترافية**: تصميم متجاوب وبسيط يسهل استخدامه على جميع الأجهزة.  
-- 📝 **معلومات دقيقة عن المنتجات**: تفاصيل حول الفوائد الغذائية ومصدر التمور.  
-- 🚚 **دعم التوصيل**: شحن محلي ودولي مع خيارات تغليف متنوعة.  
-- 💳 **وسائل دفع متعددة**: دعم خيارات الدفع الإلكتروني (Visa، PayPal...) والدفع عند الاستلام.  
+### `npm start`
 
----
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## التقنيات المستخدمة  
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### Frontend  
-- 🔧 **HTML**  
-- 🎨 **CSS**  
-- ⚙️ **JavaScript**  
-- 📱 **Tailwinds**  
+### `npm test`
 
-### Backend  
-- 🖥️ **PHP**  
-- 🗄️ **MySQL**
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### FarmeWork
-- ⚙️ **ReactJs**
+### `npm run build`
 
-### أدوات أخرى  
-- 🗃️ **Git** لإدارة النسخ  
-- 🔄 **XAMPP/WAMP** لإعداد الخادم المحلي  
-- 💻 **Visual Studio Code** (بيئة تطوير)  
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
----
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## 👥 أعضاء الفريق
+### `npm run eject`
 
-|                                                   الاتصال                  | المهام                  |      الاسم          |
-|---------------------------------------------------------------|-------------------------|--------------------------------|
-| [belkahlam2005@gmail.com](mailto:belkahlam2005@gmail.com)     |          قسم الكتالوج   |       MOHAMED BELKAHLA         |
-| [mouad.lamssila@gmail.com](mailto:mouad.lamssila@gmail.com)       |  قسم الإدارة والمستخدم   |       MOUAD LAMSILA            |
-| [AmalHmiyd@gmail.com](mailto:zakariaelferrouni@gmail.com)     |             قسم الدفع   |       Amal Hmiyd               |
-| [AymenBahiaoui@gmail.com](mailto:AbdessamadMouline@gmail.com) |             قسم السلة   |       Aymen Bahiaoui           |
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-    
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
----
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-## تثبيت المشروع 🚀
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-اتبع الخطوات التالية لتثبيت المشروع على جهازك المحلي:
+## Learn More
 
-1. قم باستنساخ المستودع باستخدام git:
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-```bash
-    git clone https://github.com/Mouadlamsila/MOUL-TMAR.git
-    cd moul-tamr
-```
----
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-2. بعد تثبيت المشروع، قم بتثبيت الحزم التالية باستخدام npm:
+### Code Splitting
 
-```bash
-    npm install axios --legacy-peer-deps
-    npm install redux-devtools-extension --legacy-peer-deps
-    npm install react-world-flags --legacy-peer-deps
-    npm install react-icons --legacy-peer-deps
-```
----
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
+### Analyzing the Bundle Size
 
-## هيكل المشروع  
-```plaintext
-moul-tamr/
-public/
-│── backgrounds/          # يحتوي على صور الخلفيات
-│── DataBase/             # يحتوي على ملفات قاعدة البيانات (إن وجدت)
-│── PHP/                  # يحتوي على ملفات PHP لمعالجة البيانات
-│   │── images/           # دليل لحفظ الصور أو الملفات المتعلقة
-│   │── connect.php       # ملف الاتصال بقاعدة البيانات
-│   │── delet.php         # حذف البيانات من قاعدة البيانات
-│   │── process_pay.php   # معالجة الدفع
-│   │── Select.php        # استعلام جلب البيانات من قاعدة البيانات
-│   │── update_Dates.php  # تحديث تواريخ البيانات
-│   │── Update.php        # تحديث بيانات عامة
-│── index.html            # الصفحة الرئيسية للتطبيق
-│── main.js               # ملف JavaScript الأساسي للتفاعل مع HTML
-src/
-│── Redux/                # ملفات Redux لإدارة الحالة
-│── App.js                # المكون الرئيسي للتطبيق
-│── CardDate.js           # مكون خاص بإدارة البيانات المتعلقة بالبطاقات
-│── Header.js             # رأس الصفحة (Header)
-│── index.css             # التنسيقات الأساسية للتطبيق
-│── index.js              # نقطة الدخول للتطبيق (JS)
-│── Login.js              # واجهة تسجيل الدخول
-│── Pass.js               # إدارة كلمات المرور
-│── Payment.js            # معالجة المدفوعات
-│── Produits.js           # عرض وإدارة المنتجات
-│── Register.js           # واجهة تسجيل المستخدم الجديد
-│── Support.js            # صفحة الدعم الفني
-│── Table.js              # جدول عرض البيانات
-│── Update.js             # مكون تحديث البيانات
-│── UpdateDate.js         # تحديث تواريخ محددة
-│── View.js               # عرض التفاصيل والبيانات
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-```
+### Making a Progressive Web App
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
+### Advanced Configuration
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

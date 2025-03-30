@@ -57,3 +57,14 @@ VALUES (
     100.00,
     'TXN123456'
 );
+
+CREATE TABLE users (
+    id INT AUTO_INCREAMENT PRIMARY KEY,
+    firstName VARCHAR(200) ,
+    lastName VARCHAR(200),
+    userName VARCHAR(200) unique NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    phone VARCHAR(200) ,
+    password VARCHAR(200) NOT null , 
+    Role VARCHAR(100)  NOT NULL
+)

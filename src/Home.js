@@ -36,7 +36,7 @@ export default function Home() {
             </div>
 
             {/* Footer */}
-            <footer className="bg-[#4b2d1f] text-white text-center py-4 flex flex-col md:flex-row justify-between items-center px-4 md:px-8">
+            <footer className="bg-[#4b2d1f] mt-4 sm:mt-0 text-white text-center py-4 flex flex-col md:flex-row justify-between items-center px-4 md:px-8">
                 {/* Support Section */}
                 <div className="flex flex-col items-center mb-4 md:mb-0">
                     <div
@@ -52,11 +52,12 @@ export default function Home() {
                 <div className="flex flex-col items-center text-sm md:text-base mb-4 md:mb-0">
                     <div className="flex items-center gap-2">
                         <span className="text-lg">📧</span>
+
                         <a
-                            href="mailto:moltamer@gmail.com"
+                            href="mailto:dev.mohamedbelkahla@gmail.com"
                             className="underline hover:text-gray-300"
                         >
-                            moltamer@gmail.com
+                            dev.mohamedbelkahla@gmail.com
                         </a>
                     </div>
                     <div className="flex items-center gap-2 mt-2">

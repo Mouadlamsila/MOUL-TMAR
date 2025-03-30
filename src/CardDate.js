@@ -32,7 +32,7 @@ export default function CardDate(props) {
     
         
     return (
-        <div className="w-auto text-center justify-center mb-9 bg-white rounded-2xl py-[2em] shadow-black shadow-md lg:hover:scale-110 transition-transform duration-300 ">
+        <div className=" w-auto text-center justify-center mb-9 bg-white rounded-xl py-[2em] shadow-black shadow-xs border border-2 border-[#4b2d1f] transition-transform duration-300 ">
             <div className="w-full flex justify-center">
                 <img src={`/PHP/${props.date.ImagePath}`} alt={props.date.Name} className='w-[200px] h-[160px]' />
             </div>

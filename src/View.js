@@ -1,34 +1,29 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function View() {
-  const data = useSelector((state) => state.UserRegister);
-  const check = useSelector((state) => state.check);
+
   const { id } = useParams();
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  // Recherche de l'utilisateur correspondant
-  const view = data.find((e) => e.id === parseInt(id));
+  const [view , setView]= useState();
+ 
+ useEffect(()=>{
+  axios.post('http://localhost/my-app/public/PHP/users/profile.php' , {id} )
+  .then((res)=>{
+    if(res.data.status === 'success'){
+      setView(res.data.user)
 
-  useEffect(()=>{
-    if(Object.keys(check).length <= 0 || parseInt(id) !== check.id){
-      dispatch({
-        type : "chofar",
-      })
-      navigate('/login');
-      
     }
-  }, [])
+  })
+ },[])
 
 
-  function Modifier() {
-    dispatch({
-      type: "update",
-      payload: { id: parseInt(id) }
-    })
-    navigate(`/Update/${id}`)
-  }
+ function Modifier(){
+  navigate(`/Update/${id}`)
+ }
 
   // Si l'utilisateur n'existe pas
   if (!view) {
@@ -47,23 +42,23 @@ export default function View() {
         </h1>
         <div className="space-y-4 w-full font-[Almarai] flex flex-col justify-center items-center">
           <p className="text-lg w-[90%] sm:w-[80%] flex justify-between font-medium text-gray-800">
-            <span>{view.Nom}</span>
+            <span>{view.firstName}</span>
             <span className="font-bold text-[#3a8e3a]">: الإسم</span>
           </p>
           <p className="text-lg w-[90%] sm:w-[80%] flex justify-between font-medium text-gray-800">
-            <span>{view.Prenom}</span>
+            <span>{view.lastName}</span>
             <span className="font-bold text-[#3a8e3a]">: اللقب</span>
           </p>
           <p className="text-lg w-[90%] sm:w-[80%] flex justify-between font-medium text-gray-800">
-            <span>{view.UserName}</span>
+            <span>{view.userName}</span>
             <span className="font-bold text-[#3a8e3a]">: اسم المستخدم</span>
           </p>
           <p className="text-lg w-[90%] sm:w-[80%] flex justify-between font-medium text-gray-800">
-            <span>{view.Numero}</span>
+            <span>{view.phone}</span>
             <span className="font-bold text-[#3a8e3a]">: الرقم الهاتف</span>
           </p>
           <p className="text-lg w-[90%] sm:w-[80%] flex justify-between font-medium text-gray-800">
-            <span>{view.Email}</span>
+            <span>{view.email}</span>
             <span className="font-bold text-[#3a8e3a]">: البريد الإلكتروني</span>
           </p>
         </div>
@@ -76,7 +71,7 @@ export default function View() {
             عودة
           </button>
           <button
-            onClick={Modifier}
+          onClick={Modifier} 
             className="bg-[#f39c12] text-white font-bold px-4 py-2 rounded-full hover:bg-[#d35400] transition duration-300"
           >
             تحديث

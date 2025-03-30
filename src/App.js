@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Login from "./Login";
 import View from "./View";
@@ -14,6 +14,7 @@ import UpdateDate from "./UpdateDate";
 import Produits from "./Produits";
 import Support from "./Support";
 import PaymentPage from "./payment";
+
 
 export default function App() {
   return (
