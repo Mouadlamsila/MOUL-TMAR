@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { Link, useNavigate } from "react-router-dom";
 
 export default function TableDates() {
   const [Data, setData] = useState([]);
   const [msg, setMsg] = useState("");
   const [refresh, setRefresh] = useState(false);
-  const check = useSelector((state) => state.check);
-  const dispatch = useDispatch();
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,15 +57,7 @@ export default function TableDates() {
       })
   }
 
-  useEffect(()=>{
-    if(Object.keys(check).length <= 0){
-      dispatch({
-        type : "chofar",
-      })
-      navigate('/login');
-      
-    }
-  }, [])
+  
 
   return (
     <div className="flex flex-col mt-[4em] sm:mt-[5em] items-center justify-center min-h-screen bg-[#4b2d1f]">

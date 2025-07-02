@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -8,8 +8,8 @@ export default function Login(){
     
     
     const[login , setLogin] = useState({ userName:"" , password:""  })
-    const user = useSelector(state => state.UserRegister)
-    const dispatch = useDispatch()
+
+
     const navigate = useNavigate()
     const [msg ,setmsg]=useState("")
     const formData = new FormData();

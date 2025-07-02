@@ -36,7 +36,7 @@ export default function Produits() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await fetch("http://localhost/my-app/public/PHP/select.php");
+                const res = await fetch("https://belkahla-lamsila.ct.ws/Select.php");
                 const data = await res.json();
                 if (data.status === "success") {
                     setDates(data.dates);

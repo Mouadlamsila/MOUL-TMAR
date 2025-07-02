@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 import { Link, useLocation } from "react-router-dom";
 
 import {easeInOut, motion} from "framer-motion";
 
 export default function Header() {
-  const dispatch = useDispatch();
+
   const [action, setAction] = useState(true);
   const userID = JSON.parse(sessionStorage.getItem('userID'));
   const locate = useLocation();

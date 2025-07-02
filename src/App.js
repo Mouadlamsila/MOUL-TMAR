@@ -8,7 +8,7 @@ import View from "./View";
 import Update from "./Update";
 import Register from "./Register";
 import Home from "./Home";
-import Pass from "./Pass";
+// import Pass from "./Pass";
 import TableDates from "./TableDates";
 import UpdateDate from "./UpdateDate";
 import Produits from "./Produits";
@@ -29,7 +29,7 @@ export default function App() {
         <Route path="/payment" element={<PaymentPage/>}/>
         <Route path="/View/:id" element={<View />} />
         <Route path="/Update/:id" element={<Update />} />
-        <Route path="/ForgetPass" element={<Pass />} />
+        {/* <Route path="/ForgetPass" element={<Pass />} /> */}
         <Route path="/Table" element={<TableDates />} />
         <Route path="/UpdateDate/:ID" element={<UpdateDate />} />
 

@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { Link, useNavigate } from "react-router-dom";
 export default function Register() {
     const [Register, setRegister] = useState({ firstName: "", lastName: "", userName: "", phone: null, email: "", password: "", Role: "user" })
-    const dispatch = useDispatch();
+
     const navigate = useNavigate();
-    const UserExist = useSelector(state => state.UserRegister);
+
     const [msg, setmsg] = useState("");
     const formData = new FormData();
     function register() {
@@ -17,7 +17,7 @@ export default function Register() {
                 formData.append(key , value);
             }
 
-            axios.post('http://localhost/my-app/public/PHP/users/signup.php', formData)
+             axios.post('https://belkahla-lamsila.ct.ws/users/signup.php', formData)
             .then((res)=>{
                 if(res.data.status === 'success'){
                     setmsg(res.data.message)

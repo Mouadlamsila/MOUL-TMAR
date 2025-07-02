@@ -67,7 +67,7 @@
 
 ```bash
     npm install axios --legacy-peer-deps
-    npm install redux-devtools-extension --legacy-peer-deps
+
     npm install react-world-flags --legacy-peer-deps
     npm install react-icons --legacy-peer-deps
 ```
@@ -91,7 +91,6 @@ public/
 │── index.html            # الصفحة الرئيسية للتطبيق
 │── main.js               # ملف JavaScript الأساسي للتفاعل مع HTML
 src/
-│── Redux/                # ملفات Redux لإدارة الحالة
 │── App.js                # المكون الرئيسي للتطبيق
 │── CardDate.js           # مكون خاص بإدارة البيانات المتعلقة بالبطاقات
 │── Header.js             # رأس الصفحة (Header)
